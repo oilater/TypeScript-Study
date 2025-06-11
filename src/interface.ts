@@ -321,3 +321,51 @@ let square2 = {} as Square2;
 square2.color = 'blue';
 square2.sideLength = 10;
 square2.penWidth = 5.5;
+
+// 하이브리드 타입 (Hybrid Types)
+interface Counter {
+    (start: number): string;
+    interval?: number;
+    reset(): void;
+}
+
+function getCounter(): Counter {
+    let counter = function(start: number) {} as Counter;
+    counter.interval = 123;
+    counter.reset = () => {};
+    return counter;
+}
+
+let c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0;
+
+// 클래스를 확장한 인터페이스 (Interfaces Extending Classes)
+
+// 인터페이스는 클래스의 멤버들을 확장할 수 있음
+class Control {
+    private state: any;
+}
+
+interface SelectableControl extends Control {
+    select(): void;
+}
+
+class Button extends Control implements SelectableControl {
+    select() { }  
+}
+
+class TextBox extends Control {
+    select() { }
+}
+
+// class Image implements SelectableControl {
+//     private state: any
+
+//     select() { }
+// }
+
+class Location {
+
+}
